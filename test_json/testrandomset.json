@@ -1,0 +1,10 @@
+{
+    "type": "set",
+    "candidates": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+    ]
+}

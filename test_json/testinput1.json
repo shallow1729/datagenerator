@@ -1,0 +1,25 @@
+{
+  "type": "sequence",
+  "symbols": [
+    "V",
+    "W"
+  ],
+  "separator": "\n",
+  "V": {
+    "type": "set",
+    "candidates": [
+      "5"
+    ]
+  },
+  "W": {
+    "type": "list",
+    "length": 5,
+    "duplicate": false,
+    "separator": " ",
+    "values": {
+      "type": "int",
+      "min": 1,
+      "max": 20
+    }
+  }
+}

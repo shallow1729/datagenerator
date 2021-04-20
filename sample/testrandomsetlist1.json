@@ -1,0 +1,13 @@
+{
+    "type": "list",
+    "values": {
+        "type": "set",
+        "candidates": [
+            "a",
+            "bc"
+        ]
+    },
+    "duplicate": true,
+    "length": 10,
+    "separator": ""
+}

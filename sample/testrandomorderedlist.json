@@ -1,0 +1,12 @@
+{
+    "type": "list",
+    "values": {
+        "type": "int",
+        "min": 1,
+        "max": 1000
+    },
+    "length": 100,
+    "duplicate": "true",
+    "separator": " ",
+    "ordered": "asc"
+}

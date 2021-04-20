@@ -1,0 +1,22 @@
+{
+    "type": "table",
+    "symbols": [
+        "V",
+        "P"
+    ],
+    "columnSeparator": " ",
+    "length": 20,
+    "separator": "\n",
+    "V": {
+        "type": "int",
+        "min": 1,
+        "max": 20,
+        "duplicate": false
+    },
+    "P": {
+        "type": "int",
+        "min": 21,
+        "max": 40,
+        "duplicate": false
+    }
+}
