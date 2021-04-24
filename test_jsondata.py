@@ -131,6 +131,7 @@ class Datagenerator(unittest.TestCase):
             jd = json.load(f)
             s = datagenerator.gen_data(jd)
             results = s.split('\n')
+            self.assertTrue(len(results), 5)
             for i in range(5):
                 v, datev = [j for j in results[i].split(',')]
                 self.assertTrue(1 <= int(v) and int(v) <= 5)
@@ -140,6 +141,21 @@ class Datagenerator(unittest.TestCase):
                 self.assertTrue(len(m), 2)
                 self.assertTrue(1 <= int(d) and int(d) <= 15)
                 self.assertTrue(len(d), 2)
+
+    def test_nestedlist(self):
+        with open('test_json/testnestedlist.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            results = s.split('\n')
+            self.assertTrue(len(results), 5)
+            d = defaultdict(int)
+            for i in range(5):
+                self.assertTrue(len(results[i]), 5)
+                for j in range(5):
+                    d[results[i][j]] += 1
+            self.assertTrue('#' in d)
+            self.assertTrue('.' in d)
+            self.assertTrue(len(d.keys()), 2)
 
 
 if __name__ == '__main__':

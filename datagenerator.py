@@ -76,9 +76,15 @@ def gen_data(jd, length=1, dupf: bool = True, ordered=None):
         sep = jd['separator']
         dupf = jd['duplicate'] if 'duplicate' in jd else True
         ordered = jd['ordered'] if 'ordered' in jd else None
-        results = gen_data(jd['values'], length=jd['length'], dupf=dupf, ordered=ordered)
-        if isinstance(results, list):
-            return sep.join(results)
+        results = []
+        for i in range(length):
+            result = gen_data(jd['values'], length=jd['length'], dupf=dupf, ordered=ordered)
+            if isinstance(result, list):
+                results.append(sep.join(result))
+            else:
+                results.append(sep.join(result))
+        if len(results) == 1:
+            return results[0]
         else:
             return results
 
@@ -87,11 +93,11 @@ def gen_data(jd, length=1, dupf: bool = True, ordered=None):
         symbols = jd['symbols']
         results = []
         for i in range(length):
-            line = []
+            result = []
             for symbol in symbols:
                 check_jd(jd, [symbol])
-                line.append(gen_data(jd[symbol]))
-            results.append(jd['separator'].join(line))
+                result.append(gen_data(jd[symbol]))
+            results.append(jd['separator'].join(result))
         if len(results) == 1:
             return results[0]
         else:
@@ -100,7 +106,6 @@ def gen_data(jd, length=1, dupf: bool = True, ordered=None):
     elif t == 'table':
         check_jd(jd, ['symbols', 'length', 'separator', 'columnSeparator'])
         symbols = jd['symbols']
-        length = jd['length']
         sep = jd['separator']
         csep = jd['columnSeparator']
         d = {}
@@ -108,9 +113,9 @@ def gen_data(jd, length=1, dupf: bool = True, ordered=None):
             check_jd(jd, [symbol])
             dupf = jd[symbol]['duplicate'] if 'duplicate' in jd[symbol] else True
             ordered = jd[symbol]['ordered'] if 'ordered' in jd[symbol] else None
-            d[symbol] = gen_data(jd[symbol], length=length, dupf=dupf, ordered=ordered)
+            d[symbol] = gen_data(jd[symbol], length=jd['length'], dupf=dupf, ordered=ordered)
         results = []
-        for i in range(length):
+        for i in range(jd['length']):
             rec = []
             for symbol in symbols:
                 rec.append(d[symbol][i])
