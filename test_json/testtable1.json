@@ -21,15 +21,19 @@
         "length": 20,
         "separator": "\n",
         "V": {
-            "type": "int",
-            "min": 1,
-            "max": 1000,
+            "values": {
+                "type": "int",
+                "min": 1,
+                "max": 1000
+            },
             "duplicate": false
         },
         "P": {
-            "type": "int",
-            "min": 0,
-            "max": 100,
+            "values": {
+                "type": "int",
+                "min": 0,
+                "max": 100
+            },
             "duplicate": false
         }
     }

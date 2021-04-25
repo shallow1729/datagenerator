@@ -99,7 +99,7 @@ def gen_and_merge_table(jd):
         check_jd(jd, [symbol])
         dupf = jd[symbol]['duplicate'] if 'duplicate' in jd[symbol] else True
         ordered = jd[symbol]['ordered'] if 'ordered' in jd[symbol] else None
-        d[symbol] = gen_data(jd[symbol], length=jd['length'], dupf=dupf, ordered=ordered)
+        d[symbol] = gen_data(jd[symbol]['values'], length=jd['length'], dupf=dupf, ordered=ordered)
     results = []
     for i in range(jd['length']):
         rec = []

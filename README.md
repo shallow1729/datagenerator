@@ -21,18 +21,22 @@ MIT
         "symbolSeparator": "-",
         "separator": " ",
         "A": {
-            "type": "set",
-            "candidates": [
-                "A",
-                "B",
-                "C"
-            ],
+            "values": {
+                "type": "set",
+                "candidates": [
+                    "A",
+                    "B",
+                    "C"
+                ]
+            },
             "duplicate": false
         },
         "B": {
-            "type": "int",
-            "min": 1,
-            "max": 8
+            "values": {
+                "type": "int",
+                "min": 1,
+                "max": 8
+            }
         }
     }
 }
@@ -150,15 +154,19 @@ Possible result of this input is as below.
     "length": 5,
     "separator": "\n",
     "V": {
-        "type": "int",
-        "min": 1,
-        "max": 5,
+        "values": {
+            "type": "int",
+            "min": 1,
+            "max": 5
+        },
         "duplicate": false
     },
     "P": {
-        "type": "int",
-        "min": 6,
-        "max": 10,
+        "values": {
+            "type": "int",
+            "min": 6,
+            "max": 10
+        },
         "duplicate": false
     }
 }

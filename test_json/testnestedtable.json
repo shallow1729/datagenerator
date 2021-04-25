@@ -12,18 +12,22 @@
         "symbolSeparator": "-",
         "separator": " ",
         "A": {
-            "type": "set",
-            "candidates": [
-                "A",
-                "B",
-                "C"
-            ],
+            "values": {
+                "type": "set",
+                "candidates": [
+                    "A",
+                    "B",
+                    "C"
+                ]
+            },
             "duplicate": false
         },
         "B": {
-            "type": "int",
-            "min": 1,
-            "max": 8
+            "values": {
+                "type": "int",
+                "min": 1,
+                "max": 8
+            }
         }
     }
 }
