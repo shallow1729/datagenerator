@@ -18,14 +18,48 @@ def check_jd(jd, required: list):
             raise Exception("".join([v, " is required\n", json.dumps(jd)]))
 
 
-def gen_data(jd, length=1, dupf: bool = True, ordered=None):
+def execute(func, jd, length: int, dupf: bool, ordered):
+    results = []
+    for i in range(length):
+        results.append(func(jd))
+
+    if ordered is not None:
+        if ordered == 'asc':
+            results.sort()
+        elif ordered == 'desc':
+            results.sort(reverse=1)
+        else:
+            raise Exception("ordered need to be asc or desc\n")
+
+    if len(results) == 1:
+        return results[0]
+    else:
+        return results
+
+
+def gen_and_merge_list(jd):
+    dupf = jd['duplicate'] if 'duplicate' in jd else True
+    ordered = jd['ordered'] if 'ordered' in jd else None
+    result = gen_data(jd['values'], length=jd['length'], dupf=dupf, ordered=ordered)
+    return jd['separator'].join(result)
+
+
+def gen_and_merge_sequence(jd):
+    result = []
+    for symbol in jd['symbols']:
+        check_jd(jd, [symbol])
+        result.append(gen_data(jd[symbol]))
+    return jd['separator'].join(result)
+
+
+def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
     check_jd(jd, ['type'])
     t = jd['type']
-    results = []
     if t == 'set':
         check_jd(jd, ['candidates'])
         candidates = jd['candidates']
         rest = len(candidates)
+        results = []
 
         if dupf:
             for i in range(length):
@@ -73,35 +107,12 @@ def gen_data(jd, length=1, dupf: bool = True, ordered=None):
         check_jd(jd, ['length', 'separator', 'values'])
         if 'ordered' in jd and jd['ordered'] not in ['asc', 'desc']:
             raise Exception("".join(["ordered need to be asc or desc\n", json.dump(jd)]))
-        sep = jd['separator']
-        dupf = jd['duplicate'] if 'duplicate' in jd else True
-        ordered = jd['ordered'] if 'ordered' in jd else None
-        results = []
-        for i in range(length):
-            result = gen_data(jd['values'], length=jd['length'], dupf=dupf, ordered=ordered)
-            if isinstance(result, list):
-                results.append(sep.join(result))
-            else:
-                results.append(sep.join(result))
-        if len(results) == 1:
-            return results[0]
-        else:
-            return results
+        return execute(gen_and_merge_list, jd, length, dupf, ordered)
 
     elif t == 'sequence':
         check_jd(jd, ['symbols', 'separator'])
         symbols = jd['symbols']
-        results = []
-        for i in range(length):
-            result = []
-            for symbol in symbols:
-                check_jd(jd, [symbol])
-                result.append(gen_data(jd[symbol]))
-            results.append(jd['separator'].join(result))
-        if len(results) == 1:
-            return results[0]
-        else:
-            return results
+        return execute(gen_and_merge_sequence, jd, length, dupf, ordered)
 
     elif t == 'table':
         check_jd(jd, ['symbols', 'length', 'separator', 'columnSeparator'])
