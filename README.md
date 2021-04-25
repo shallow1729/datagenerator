@@ -8,6 +8,7 @@ MIT
 `python3 datagenerator.py sample/sampletable1.json`
 
 ## Example
+Example json inputs are in `sample/`
 ### input
 ```
 {
@@ -55,7 +56,6 @@ A-2 B-2 C-1
 
 
 ## json format
-Example json inputs are in `sample/`
 ### set
 ```
 {
