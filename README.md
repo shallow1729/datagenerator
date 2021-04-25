@@ -69,7 +69,8 @@ Example json inputs are in `sample/`
     "max": 5
 }
 ```
-`int` select one integer the value of which is `min <= value <= max`.
+`int` select one integer the value of which is `min <= value <= max`.  
+You can use `digits` to 0 padding
 
 ### char
 ```
