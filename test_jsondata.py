@@ -157,6 +157,24 @@ class Datagenerator(unittest.TestCase):
             self.assertTrue('.' in d)
             self.assertTrue(len(d.keys()), 2)
 
+    def test_nestedtable(self):
+        with open('test_json/testnestedtable.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            results = s.split('\n')
+            self.assertTrue(len(results), 5)
+            d = {}
+            for i in range(5):
+                rec = results[i].split(' ')
+                self.assertTrue(len(rec), 3)
+                for j in range(3):
+                    ch, integ = rec[j].split('-')
+                    d[ch] = 1
+                    self.assertTrue(1 <= int(integ) and int(integ) <= 8)
+                self.assertEqual(len(d.keys()), 3)
+                for ch in ['A', 'B', 'C']:
+                    self.assertTrue(ch in d)
+
 
 if __name__ == '__main__':
     unittest.main()

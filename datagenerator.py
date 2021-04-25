@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime
 import json
 import os
@@ -78,12 +79,32 @@ def gen_and_merge_sequence(jd):
     return jd['separator'].join(result)
 
 
+def gen_and_merge_table(jd):
+    symbols = jd['symbols']
+    sep = jd['separator']
+    csep = jd['columnSeparator']
+    d = {}
+    for symbol in symbols:
+        check_jd(jd, [symbol])
+        dupf = jd[symbol]['duplicate'] if 'duplicate' in jd[symbol] else True
+        ordered = jd[symbol]['ordered'] if 'ordered' in jd[symbol] else None
+        d[symbol] = gen_data(jd[symbol], length=jd['length'], dupf=dupf, ordered=ordered)
+    results = []
+    for i in range(jd['length']):
+        rec = []
+        for symbol in symbols:
+            rec.append(d[symbol][i])
+        results.append(csep.join(rec))
+    return sep.join(results)
+
+
 def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
     check_jd(jd, ['type'])
     t = jd['type']
     if t == 'set':
         check_jd(jd, ['candidates'])
-        results = select_data(jd['candidates'], length, dupf, ordered)
+        # use copy to avoid side effect.
+        results = select_data(copy.copy(jd['candidates']), length, dupf, ordered)
         if length == 1:
             return results[0]
         else:
@@ -125,27 +146,11 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
 
     elif t == 'sequence':
         check_jd(jd, ['symbols', 'separator'])
-        symbols = jd['symbols']
         return execute(gen_and_merge_sequence, jd, length, dupf, ordered)
 
     elif t == 'table':
         check_jd(jd, ['symbols', 'length', 'separator', 'columnSeparator'])
-        symbols = jd['symbols']
-        sep = jd['separator']
-        csep = jd['columnSeparator']
-        d = {}
-        for symbol in symbols:
-            check_jd(jd, [symbol])
-            dupf = jd[symbol]['duplicate'] if 'duplicate' in jd[symbol] else True
-            ordered = jd[symbol]['ordered'] if 'ordered' in jd[symbol] else None
-            d[symbol] = gen_data(jd[symbol], length=jd['length'], dupf=dupf, ordered=ordered)
-        results = []
-        for i in range(jd['length']):
-            rec = []
-            for symbol in symbols:
-                rec.append(d[symbol][i])
-            results.append(csep.join(rec))
-        return sep.join(results)
+        return execute(gen_and_merge_table, jd, length, dupf, ordered)
 
 
 if __name__ == "__main__":
