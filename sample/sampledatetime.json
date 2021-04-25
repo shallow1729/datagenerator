@@ -1,0 +1,68 @@
+{
+    "type": "sequence",
+    "symbols": [
+        "date",
+        "T",
+        "time"
+    ],
+    "separator": "",
+    "date": {
+        "type": "sequence",
+        "symbols": [
+            "Y",
+            "M",
+            "D"
+        ],
+        "separator": "-",
+        "Y": {
+            "type": "int",
+            "min": 2018,
+            "max": 2020
+        },
+        "M": {
+            "type": "int",
+            "min": 1,
+            "max": 5,
+            "digits": 2
+        },
+        "D": {
+            "type": "int",
+            "min": 1,
+            "max": 28,
+            "digits": 2
+        }
+    },
+    "T": {
+        "type": "set",
+        "candidates": [
+            "T"
+        ]
+    },
+    "time": {
+        "type": "sequence",
+        "separator": ":",
+        "symbols": [
+            "h",
+            "m",
+            "s"
+        ],
+        "h": {
+            "type": "int",
+            "min": 0,
+            "max": 23,
+            "digits": 2
+        },
+        "m": {
+            "type": "int",
+            "min": 0,
+            "max": 59,
+            "digits": 2
+        },
+        "s": {
+            "type": "int",
+            "min": 0,
+            "max": 59,
+            "digits": 2
+        }
+    }
+}
