@@ -5,18 +5,18 @@
         "P"
     ],
     "symbolSeparator": " ",
-    "length": 5,
+    "length": 20,
     "separator": "\n",
     "V": {
         "type": "int",
         "min": 1,
-        "max": 5,
+        "max": 20,
         "duplicate": false
     },
     "P": {
         "type": "int",
-        "min": 6,
-        "max": 10,
+        "min": 21,
+        "max": 40,
         "duplicate": false
     }
 }

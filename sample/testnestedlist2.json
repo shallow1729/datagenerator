@@ -1,0 +1,18 @@
+{
+    "type": "list",
+    "length": 5,
+    "separator": "\n",
+    "duplicate": false,
+    "values": {
+        "type": "list",
+        "length": 4,
+        "separator": "",
+        "values": {
+            "type": "set",
+            "candidates": [
+                "#",
+                "."
+            ]
+        }
+    }
+}
