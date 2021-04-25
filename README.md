@@ -71,10 +71,12 @@ Example json inputs are in `sample/`
     "type": "int",
     "min": 1,
     "max": 5
+    "digits": 2
 }
 ```
-`int` select one integer the value of which is `min <= value <= max`.  
-You can use `digits` to 0 padding
+`int` select one integer the value of which is `min <= value <= max`. 
+if `digits` is defined, 0 padding will be done. the result of this input is like `02`.  
+You can also use `candidates` instead of `min` and `max`.
 
 ### char
 ```

@@ -123,8 +123,12 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
             return results
 
     elif t == 'int':
-        check_jd(jd, ['min', 'max'])
-        candidates = [i for i in range(jd['min'], jd['max'] + 1)]
+        candidates = None
+        if 'candidates' in jd:
+            candidates = jd['candidates']
+        else:
+            check_jd(jd, ['min', 'max'])
+            candidates = [i for i in range(jd['min'], jd['max'] + 1)]
         if length > len(candidates):
             raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         results = select_data(candidates, length, dupf, ordered)

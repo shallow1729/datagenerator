@@ -70,6 +70,16 @@ class Datagenerator(unittest.TestCase):
                 d[v] = 1
             self.assertEqual(len(d.keys()), 100)
 
+    def test_testintcandidatelist(self):
+        with open('test_json/testintcandidatelist.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            ans = [1, 3, 5, 11, 23, 111, 211]
+            result = [int(i) for i in s.split(' ')]
+            self.assertEqual(len(result), 7)
+            for i in range(7):
+                self.assertEqual(ans[i], result[i])
+
     def test_testrandomorderedlist(self):
         with open('test_json/testrandomorderedlist.json') as f:
             jd = json.load(f)
