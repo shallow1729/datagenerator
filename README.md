@@ -1,6 +1,48 @@
-## datagenerator
-`datagenerator` can generate random data defined with json.
-It can also control output format like csv and blank separated data, which is often used for programming contest.
+# datagenerator
+`datagenerator` is simple but powerful random data generator.
+
+## Example:
+### input
+```
+{
+    "type": "list",
+    "length": 5,
+    "separator": "\n",
+    "values": {
+        "type": "table",
+        "symbols": [
+            "A",
+            "B"
+        ],
+        "length": 3,
+        "symbolSeparator": "-",
+        "separator": " ",
+        "A": {
+            "type": "set",
+            "candidates": [
+                "A",
+                "B",
+                "C"
+            ],
+            "duplicate": false
+        },
+        "B": {
+            "type": "int",
+            "min": 1,
+            "max": 8
+        }
+    }
+}
+```
+### output
+```
+C-5 B-1 A-3
+B-4 C-6 A-4
+B-8 C-7 A-2
+B-2 C-2 A-8
+A-2 B-2 C-1
+```
+
 
 ## json format
 Example json inputs are in `sample/`
