@@ -4,7 +4,7 @@
 ## License
 MIT
 
-## Example:
+## Example
 ### input
 ```
 {
@@ -63,7 +63,7 @@ Example json inputs are in `sample/`
     ]
 }
 ```
-`set` select one value from candidates.
+`set` select one value from `candidates`.
 
 ### int
 ```
@@ -84,7 +84,7 @@ You can use `digits` to 0 padding
   "max": "d"
 }
 ```
-`char` select one charactor the value of which is `min <= value <= max` in an integer representing of the Unicode character.
+`char` select one character the value of which is `min <= value <= max` in an integer representing of the Unicode character.
 
 ### list
 ```
@@ -104,8 +104,8 @@ You can use `digits` to 0 padding
 ```
 `list` randomly select `values` from candidates for `length` times and then joins with `separator`.  
 This example will output like `a b a a a b b a b b`.  
-`duplicate` flag can controll if select same value multiple times.(default value is True)  
-`ordered` flag can controll if result have to be sorted. you can control the direction with `asc` or `desc`. If not defined, result will not be sorted.
+`duplicate` flag can control if select same value multiple times.(default value is True)  
+`ordered` flag can control if result have to be sorted. you can control the direction with `asc` or `desc`. If not defined, result will not be sorted.
 
 ### sequence
 ```
@@ -135,7 +135,7 @@ This example will output like `a b a a a b b a b b`.
   }
 }
 ```
-`sequence` output symbols in order joined by separator.
+`sequence` output symbols in order joined by `separator`.
 Possible result of this input is as below. 
 ```
 5
@@ -171,7 +171,7 @@ Possible result of this input is as below.
     }
 }
 ```
-`table` generate symbol values and the join them with `symbolSeparator` and then join each line with `separator`.
+`table` generate symbol values and then join them with `symbolSeparator` and then join each line with `separator`.
 Possible result of this example is as below.
 ```
 4 6
