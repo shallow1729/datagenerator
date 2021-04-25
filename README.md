@@ -1,6 +1,9 @@
 # datagenerator
 `datagenerator` is simple but powerful random data generator.
 
+## License
+MIT
+
 ## Example:
 ### input
 ```
