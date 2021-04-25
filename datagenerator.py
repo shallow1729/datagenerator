@@ -82,7 +82,7 @@ def gen_and_merge_sequence(jd):
 def gen_and_merge_table(jd):
     symbols = jd['symbols']
     sep = jd['separator']
-    csep = jd['columnSeparator']
+    csep = jd['symbolSeparator']
     d = {}
     for symbol in symbols:
         check_jd(jd, [symbol])
@@ -149,7 +149,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
         return execute(gen_and_merge_sequence, jd, length, dupf, ordered)
 
     elif t == 'table':
-        check_jd(jd, ['symbols', 'length', 'separator', 'columnSeparator'])
+        check_jd(jd, ['symbols', 'length', 'separator', 'symbolSeparator'])
         return execute(gen_and_merge_table, jd, length, dupf, ordered)
 
 

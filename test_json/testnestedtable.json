@@ -9,7 +9,7 @@
             "B"
         ],
         "length": 3,
-        "columnSeparator": "-",
+        "symbolSeparator": "-",
         "separator": " ",
         "A": {
             "type": "set",

@@ -4,7 +4,7 @@
         "V",
         "P"
     ],
-    "columnSeparator": " ",
+    "symbolSeparator": " ",
     "length": 5,
     "separator": "\n",
     "V": {

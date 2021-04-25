@@ -5,7 +5,7 @@
         "time"
     ],
     "length": 5,
-    "columnSeparator": ",",
+    "symbolSeparator": ",",
     "separator": "\n",
     "id": {
         "type": "int",

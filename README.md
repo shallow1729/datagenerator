@@ -100,7 +100,7 @@ Possible result of this input is as below.
         "V",
         "P"
     ],
-    "columnSeparator": " ",
+    "symbolSeparator": " ",
     "length": 5,
     "separator": "\n",
     "V": {
@@ -117,7 +117,7 @@ Possible result of this input is as below.
     }
 }
 ```
-`table` generate symbol values and the join them with `columnGenerator` and then join each line with `separator`.
+`table` generate symbol values and the join them with `symbolSeparator` and then join each line with `separator`.
 Possible result of this example is as below.
 ```
 4 6
