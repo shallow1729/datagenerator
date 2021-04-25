@@ -4,6 +4,9 @@
 ## License
 MIT
 
+## Usage
+`python3 datagenerator.py sample/sampletable1.json`
+
 ## Example
 ### input
 ```
