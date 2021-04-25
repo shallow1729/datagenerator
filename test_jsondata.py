@@ -175,6 +175,17 @@ class Datagenerator(unittest.TestCase):
                 for ch in ['A', 'B', 'C']:
                     self.assertTrue(ch in d)
 
+    def test_nestedlist2(self):
+        with open('test_json/testnestedlist2.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            results = s.split('\n')
+            self.assertTrue(len(results), 5)
+            d = {}
+            for i in range(5):
+                d[results[i]] = 1
+            self.assertEqual(len(d.keys()), 5)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -29,7 +29,7 @@ def select_data(candidates, length: int, dupf: bool, ordered):
             results.append(result)
     else:
         if length > len(candidates):
-            raise Exception("".join(["number of candidates is smaller than length\n", json.dump(jd)]))
+            raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         for i in range(length):
             target, result = gen_set(candidates, rest - i)
             results.append(result)
@@ -47,8 +47,19 @@ def select_data(candidates, length: int, dupf: bool, ordered):
 
 def execute(func, jd, length: int, dupf: bool, ordered):
     results = []
-    for i in range(length):
-        results.append(func(jd))
+    d = {}
+    counter = 0
+    while len(results) < length:
+        result = func(jd)
+        if result not in d:
+            results.append(result)
+            if not dupf:
+                d[result] = 1
+                counter = 0
+        else:
+            counter += 1
+            if counter == 10:
+                raise Exception("".join(["duplicated value frequently occur\n", json.dumps(jd)]))
 
     if ordered is not None:
         if ordered == 'asc':
@@ -114,7 +125,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
         check_jd(jd, ['min', 'max'])
         candidates = [i for i in range(jd['min'], jd['max'] + 1)]
         if length > len(candidates):
-            raise Exception("".join(["number of candidates is smaller than length\n", json.dump(jd)]))
+            raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         results = select_data(candidates, length, dupf, ordered)
 
         if 'digits' in jd:
@@ -130,7 +141,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
     elif t == 'char':
         candidates = [chr(i) for i in range(ord(jd['min']), ord(jd['max']) + 1)]
         if length > len(candidates):
-            raise Exception("".join(["number of candidates is smaller than length\n", json.dump(jd)]))
+            raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         results = select_data(candidates, length, dupf, ordered)
 
         if length == 1:
@@ -141,7 +152,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
     elif t == 'list':
         check_jd(jd, ['length', 'separator', 'values'])
         if 'ordered' in jd and jd['ordered'] not in ['asc', 'desc']:
-            raise Exception("".join(["ordered need to be asc or desc\n", json.dump(jd)]))
+            raise Exception("".join(["ordered need to be asc or desc\n", json.dumps(jd)]))
         return execute(gen_and_merge_list, jd, length, dupf, ordered)
 
     elif t == 'sequence':
