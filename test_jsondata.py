@@ -116,7 +116,7 @@ class Datagenerator(unittest.TestCase):
                 self.assertTrue(1 <= v and v <= 1000)
                 self.assertTrue(0 <= p and p <= 100)
 
-    def test_testtable1(self):
+    def test_testtable2(self):
         with open('test_json/testtable2.json') as f:
             jd = json.load(f)
             s = datagenerator.gen_data(jd)
