@@ -8,7 +8,25 @@ MIT
 `python3 datagenerator.py sample/sampletable1.json`
 
 ## Example
-Example json inputs are in `sample/`
+### input
+```
+{
+    "type": "list",
+    "values": {
+        "type": "int",
+        "min": 1,
+        "max": 100
+    },
+    "duplicate": false,
+    "length": 5,
+    "separator": ","
+}
+```
+### output
+```
+31,78,23,63,64
+```
+
 ### input
 ```
 {
@@ -53,7 +71,7 @@ B-8 C-7 A-2
 B-2 C-2 A-8
 A-2 B-2 C-1
 ```
-
+Other example json inputs are in `sample/`
 
 ## json format
 ### set
