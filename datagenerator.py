@@ -129,7 +129,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
         else:
             check_jd(jd, ['min', 'max'])
             candidates = [i for i in range(jd['min'], jd['max'] + 1)]
-        if length > len(candidates):
+        if length > len(candidates) and not dupf:
             raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         results = select_data(candidates, length, dupf, ordered)
 
@@ -145,7 +145,7 @@ def gen_data(jd, length: int = 1, dupf: bool = True, ordered=None):
 
     elif t == 'char':
         candidates = [chr(i) for i in range(ord(jd['min']), ord(jd['max']) + 1)]
-        if length > len(candidates):
+        if length > len(candidates) and not dupf:
             raise Exception("".join(["number of candidates is smaller than length\n", json.dumps(jd)]))
         results = select_data(candidates, length, dupf, ordered)
 
