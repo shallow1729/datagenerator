@@ -1,0 +1,36 @@
+{
+	"type": "table",
+	"symbols": [
+		"V",
+		"P"
+	],
+	"symbolSeparator": " ",
+	"length": 20,
+	"separator": "\n",
+	"uniqueKeys": [
+		[
+			"V"
+		],
+		[
+			"P"
+		],
+		[
+			"V",
+			"P"
+		]
+	],
+	"V": {
+		"values": {
+			"type": "int",
+			"min": 1,
+			"max": 20
+		}
+	},
+	"P": {
+		"values": {
+			"type": "int",
+			"min": 21,
+			"max": 40
+		}
+	}
+}

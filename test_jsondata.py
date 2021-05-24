@@ -196,6 +196,32 @@ class Datagenerator(unittest.TestCase):
                 d[results[i]] = 1
             self.assertEqual(len(d.keys()), 5)
 
+    def test_multipleuniquekey(self):
+        with open('test_json/testmultipleuniquekey.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            results = s.split('\n')
+            self.assertTrue(len(results), 10)
+            d1 = {}
+            d2 = {}
+            for i in range(10):
+                values = results[i].split()
+                d1[(values[0], values[1])] = 1
+                d2[(values[0], values[2])] = 1
+            # check multiple unique key work
+            self.assertEqual(len(d1.keys()), 10)
+            self.assertEqual(len(d2.keys()), 10)
+
+    def test_multipleuniquekey2(self):
+        with open('test_json/testmultipleuniquekey2.json') as f:
+            jd = json.load(f)
+            s = datagenerator.gen_data(jd)
+            results = s.split('\n')
+            for i in range(20):
+                v, p = [int(j) for j in results[i].split()]
+                self.assertTrue(0 <= v and v <= 20)
+                self.assertTrue(21 <= p and p <= 40)
+
 
 if __name__ == '__main__':
     unittest.main()

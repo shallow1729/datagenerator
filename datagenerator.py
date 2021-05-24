@@ -4,6 +4,7 @@ import json
 import os
 import random
 import sys
+MAX_COLLISION_COUNT = 10
 
 
 # gen_random_set return one value from candidates
@@ -58,7 +59,7 @@ def execute(func, jd, length: int, dupf: bool, ordered):
                 counter = 0
         else:
             counter += 1
-            if counter == 10:
+            if counter == MAX_COLLISION_COUNT:
                 raise Exception("".join(["duplicated value frequently occur\n", json.dumps(jd)]))
 
     if ordered is not None:
@@ -94,6 +95,22 @@ def gen_and_merge_table(jd):
     symbols = jd['symbols']
     sep = jd['separator']
     csep = jd['symbolSeparator']
+    # parse UniqueKey
+    uniqueKeys = []
+    if 'uniqueKeys' in jd:
+        uniqueKey_defs = jd['uniqueKeys']
+        # if uniqueKey is single column, convert to duplicate flag.
+        for uniqueKey_def in uniqueKey_defs:
+            if len(uniqueKey_def) == 1:
+                jd[uniqueKey_def[0]]['duplicate'] = False
+        for uniqueKey_def in uniqueKey_defs:
+            if len(uniqueKey_def) <= 1:
+                continue
+            # if unique key is included, the key is unique
+            # add only if all part of unique key can duplicate
+            if all([jd[symbol]['duplicate'] for symbol in uniqueKey_def]):
+                uniqueKeys.append(uniqueKey_def)
+
     d = {}
     for symbol in symbols:
         check_jd(jd, [symbol])
@@ -102,7 +119,34 @@ def gen_and_merge_table(jd):
         ordered = jd[symbol]['ordered'] if 'ordered' in jd[symbol] else None
         d[symbol] = gen_data(jd[symbol]['values'], length=jd['length'], dupf=dupf, ordered=ordered)
     results = []
+    uniq_memo = [{} for _ in range(len(uniqueKeys))]
     for i in range(jd['length']):
+        # unique key check and regenerate if collide
+
+        # counter count number of collide
+        counter = 0
+        while True:
+            keys = []
+            for j in range(len(uniqueKeys)):
+                tmp = tuple(d[symbol][i] for symbol in uniqueKeys[j])
+                if tmp not in uniq_memo[j]:
+                    keys.append(tmp)
+                else:
+                    # if collide, just regenerate.
+                    # unique check is not necessary because each symbol value can duplicate.
+                    for symbol in uniqueKeys[j]:
+                        d[symbol][i] = gen_data(jd[symbol]['values'], length=1)
+                    counter += 1
+                    if counter == MAX_COLLISION_COUNT:
+                        raise Exception("".join(["duplicated value frequently occur\n", json.dumps(jd)]))
+                    break
+
+            if len(keys) == len(uniqueKeys):
+                for j in range(len(uniqueKeys)):
+                    uniq_memo[j][keys[j]] = 1
+                counter = 0
+                break
+
         rec = []
         for symbol in symbols:
             rec.append(d[symbol][i])

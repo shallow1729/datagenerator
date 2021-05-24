@@ -1,0 +1,45 @@
+{
+	"type": "table",
+	"symbols": [
+		"A",
+		"B",
+		"C"
+	],
+	"symbolSeparator": " ",
+	"length": 10,
+	"separator": "\n",
+	"uniqueKeys": [
+		[
+			"A",
+			"B"
+		],
+		[
+			"A",
+			"C"
+		]
+	],
+	"A": {
+		"values": {
+			"type": "int",
+			"min": 1,
+			"max": 5
+		},
+		"duplicate": true
+	},
+	"B": {
+		"values": {
+			"type": "int",
+			"min": 1,
+			"max": 5
+		},
+		"duplicate": true
+	},
+	"C": {
+		"values": {
+			"type": "char",
+			"min": "a",
+			"max": "e"
+		},
+		"duplicate": true
+	}
+}
