@@ -1,0 +1,1 @@
+`mysql -uroot -Dtest -e "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='docs' ORDER BY ORDINAL_POSITION;" | python3 gen_json.py`

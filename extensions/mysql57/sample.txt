@@ -1,0 +1,6 @@
+COLUMN_NAME	ORDINAL_POSITION	IS_NULLABLE	COLUMN_TYPE	COLUMN_KEY	UNIQ_KEYS
+id	1	NO	int(10)	PRI	PRIMARY
+name	2	YES	varchar(10)	UNI	name
+status	3	YES	int(11)		NULL
+created_at	4	YES	datetime		NULL
+text	5	YES	text		NULL
