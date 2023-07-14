@@ -1,0 +1,130 @@
+{
+	"type": "table",
+	"length": 3,
+	"separator": "\n",
+	"symbolSeparator": ",",
+	"symbols": [
+		"id",
+		"name",
+		"status",
+		"created_at",
+		"text"
+	],
+	"id": {
+		"values": {
+			"type": "int",
+			"max": 1000000,
+			"min": 0
+		}
+	},
+	"name": {
+		"values": {
+			"type": "list",
+			"length": 10,
+			"separator": "",
+			"values": {
+				"type": "char",
+				"min": "a",
+				"max": "z"
+			}
+		}
+	},
+	"status": {
+		"values": {
+			"type": "int",
+			"max": 1000000,
+			"min": 0
+		}
+	},
+	"created_at": {
+		"values": {
+			"type": "sequence",
+			"symbols": [
+				"date",
+				"T",
+				"time"
+			],
+			"separator": "",
+			"date": {
+				"type": "sequence",
+				"symbols": [
+					"Y",
+					"M",
+					"D"
+				],
+				"separator": "-",
+				"Y": {
+					"type": "int",
+					"min": 1990,
+					"max": 2030
+				},
+				"M": {
+					"type": "int",
+					"min": 1,
+					"max": 12,
+					"digits": 2
+				},
+				"D": {
+					"type": "int",
+					"min": 1,
+					"max": 28,
+					"digits": 2
+				}
+			},
+			"T": {
+				"type": "set",
+				"candidates": [
+					"T"
+				]
+			},
+			"time": {
+				"type": "sequence",
+				"separator": ":",
+				"symbols": [
+					"h",
+					"m",
+					"s"
+				],
+				"h": {
+					"type": "int",
+					"min": 0,
+					"max": 23,
+					"digits": 2
+				},
+				"m": {
+					"type": "int",
+					"min": 0,
+					"max": 59,
+					"digits": 2
+				},
+				"s": {
+					"type": "int",
+					"min": 0,
+					"max": 59,
+					"digits": 2
+				}
+			}
+		}
+	},
+	"text": {
+		"values": {
+			"type": "list",
+			"length": 100,
+			"separator": "",
+			"values": {
+				"type": "char",
+				"min": "a",
+				"max": "z"
+			}
+		}
+	},
+	"uniqueKeys": [
+		[
+			"id"
+		],
+		[
+			"name"
+		]
+	]
+}
+
